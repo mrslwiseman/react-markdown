@@ -11,16 +11,27 @@ class App extends Component {
     this.state = {
       md: '',
       showPreviewBar: true,
-      showEditor: true
+      showEditor: true,
+      file: null
     };
   }
 
-  loadSampleData = () => {
+  // LIFE CYCLE HOOKS
 
+  componentWillMount() {
+    this.setDimensionsState()
+    //this.loadSampleData();
+    window.addEventListener('resize', debounce(() => this.setDimensionsState(), 50))
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize')
+  }
+
+
+  loadSampleData = () => {
     axios.get('/api/sample')
       .then(res => this.setState({ md: res.data }))
       .catch(e => alert('That didnt work.' + e))
-
   }
 
   toggleBar = () => {
@@ -52,54 +63,63 @@ class App extends Component {
     }
   }
 
-    componentWillMount(){
-      this.setDimensionsState()
-      window.addEventListener('resize', debounce(() => this.setDimensionsState(), 50))
+
+
+  loadFile = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      // do something with the file ie upload to cloud
+      this.setState({
+        md: e.target.result
+      })
+      console.log(e.target.result)
     }
-    componentWillUnmount(){
-      window.removeEventListener('resize')
-    }
-    render() {
-      return (
-        <div className="app">
-          <header>
-            <h1>React Markdown Previewer</h1>
-            <nav>
-              <button className="nav__button" onClick={this.loadSampleData}>LOAD SAMPLE DATA</button>
-              <button className="nav__button" onClick={this.toggleBar}>Toggle Preview</button>
-              <button className="nav__button">Upload .md</button>
-              <button className="nav__button">Download HTML</button>
-            </nav>
-          </header>
-          <main className="main">
-            {
-              this.state.showEditor &&
-              <div className="input">
-                <textarea
-                  onChange={e => this.setState({ md: e.target.value })}
-                  ref={input => this.textarea = input}
-                  name="md-input"
-                  id="md-input"
-
-                  spellCheck={true}
-                  autoFocus={true}
-                  value={this.state.md}
-                >
-                </textarea>
-              </div>
-            }
-
-            {
-              this.state.showPreviewBar &&
-                <ReactMarkdown className={'output'} source={this.state.md} />
-
-
-            }
-          </main>
-          
-        </div>
-      );
-    }
+    reader.readAsText(file)
   }
 
-  export default App;
+  render() {
+    return (
+      <div className="app">
+        <header>
+          <h1>React Markdown Previewer</h1>
+          <nav>
+            <button className="nav__button" onClick={this.toggleBar}>Toggle Preview</button>
+            <form>
+              <input type="file" name="markdown" id="markdown" onChange={this.loadFile} />
+            </form>
+          </nav>
+        </header>
+        <main className="main">
+          {
+            this.state.showEditor &&
+            <div className="input">
+              <textarea
+                onChange={e => this.setState({ md: e.target.value })}
+                ref={input => this.textarea = input}
+                name="md-input"
+                id="md-input"
+
+                spellCheck={true}
+                autoFocus={true}
+                value={this.state.md}
+              >
+              </textarea>
+            </div>
+          }
+
+          {
+            this.state.showPreviewBar &&
+            <ReactMarkdown className={'output'} source={this.state.md} />
+
+
+          }
+        </main>
+
+      </div>
+    );
+  }
+}
+
+export default App;
