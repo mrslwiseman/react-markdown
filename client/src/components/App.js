@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown'
-import fs from 'fs'
 import 'normalize.css';
 import '../styles/App.scss';
 import axios from 'axios'
 import { debounce } from 'lodash'
+
+import Icon from './Icon'
+import { ICONS } from '../constants'
+
+
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -47,7 +52,7 @@ class App extends Component {
 
   onToggleEditorBar = () => {
     const { showEditor } = this.state;
-    
+
     this.setState({
       showEditor: !showEditor
 
@@ -83,8 +88,9 @@ class App extends Component {
 
   loadFile = (e) => {
     e.preventDefault();
-    
-    if(e.target.files){
+    console.log(e.target.files);
+
+    if (e.target.files) {
       const file = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -96,20 +102,49 @@ class App extends Component {
     }
   }
 
+onFileUploadClick = () => {
+  this.fileInput.click()
+}
+
   render() {
     return (
       <div className="app">
         <header>
-          <h1>React Markdown Previewer</h1>
+          <h1>Yame.</h1>
+          <p>Yet Another Markdown Editor.</p>
           <nav>
-          <button className="nav__button" onClick={this.loadSampleData}>Sample</button>
-          <button className="nav__button" onClick={this.onTogglePreviewBar}>Toggle</button>
-          <button className="nav__button" onClick={this.onToggleEditorBar}>Toggle</button>
-          <label className="fileContainer">
-          Upload File
-            <input onChange={this.loadFile} type="file" name="markdown" id="markdown"/>
-          </label>
-          
+            <ul>
+
+                <button className="nav__button fileContainer" onClick={this.onFileUploadClick}>
+                    <Icon icon={ICONS.UPLOAD} />
+                  <input ref={input => this.fileInput = input} onChange={this.loadFile} type="file" name="file" id="file" />
+                </button>
+                <button className="nav__button" onClick={this.onToggleEditorBar}>
+                  <Icon icon={ICONS.EDIT} />
+                  <span>Toggle Editor</span>
+              </button>
+                <button className="nav__button" onClick={this.onTogglePreviewBar}>
+                  <Icon icon={ICONS.PREVIEW} />
+                  <span>Toggle Preview</span>
+              </button>
+                <button className="nav__button" onClick={this.onTogglePreviewBar}>
+                  <Icon icon={ICONS.COPY} />
+                  <span>Copy</span>
+              </button>
+                <button className="nav__button" onClick={this.onTogglePreviewBar}>
+                  <Icon icon={ICONS.DOWNLOAD} />
+                  <span>Download</span>
+              </button>
+                <button className="nav__button" onClick={this.onTogglePreviewBar}>
+                  <Icon icon={ICONS.SHARE} />
+                  <span>Share</span>
+              </button>
+
+              <button className="nav__button" onClick={this.loadSampleData}>
+                Load Sample
+              </button>
+            </ul>
+
           </nav>
         </header>
         <main className="main">
@@ -127,16 +162,16 @@ class App extends Component {
                 value={this.state.md}
               >
               </textarea>
-              
+
             </div>
           }
 
           {
             this.state.showPreviewBar &&
-            <ReactMarkdown className={'output'} source={this.state.md} />
-            
-            
-            
+            <ReactMarkdown className={'output'} source={this.state.md}></ReactMarkdown>
+
+
+
 
 
           }

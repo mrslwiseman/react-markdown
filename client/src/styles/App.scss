@@ -18,7 +18,11 @@ html, body {
 }
 nav {
     text-align: center;
+    display: flex;
     
+    ul {
+        width: 100%;
+    }
 }
 
 .main {
@@ -92,6 +96,13 @@ footer {
 }
 
 @media all and (min-width: 768px){
+
+    .nav__button {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 10px;
+    }
+
    .main {
         flex-direction: row;
     }
@@ -112,4 +123,18 @@ footer {
     }
     
     
+}
+
+.fileContainer {
+    input {
+      display: none;
+    }
+}
+.nav__button {
+    list-style: none;
+    display: inline-block;
+    border: none;
+    span {
+        font-size: 0;
+    }
 }
