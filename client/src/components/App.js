@@ -83,16 +83,17 @@ class App extends Component {
 
   loadFile = (e) => {
     e.preventDefault();
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      // do something with the file ie upload to cloud
-      this.setState({
-        md: e.target.result
-      })
-      console.log(e.target.result)
+    
+    if(e.target.files){
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.setState({
+          md: e.target.result
+        })
+      }
+      reader.readAsText(file)
     }
-    reader.readAsText(file)
   }
 
   render() {
@@ -104,9 +105,11 @@ class App extends Component {
           <button className="nav__button" onClick={this.loadSampleData}>Sample</button>
           <button className="nav__button" onClick={this.onTogglePreviewBar}>Toggle</button>
           <button className="nav__button" onClick={this.onToggleEditorBar}>Toggle</button>
-            <form>
-              <input type="file" name="markdown" id="markdown" onChange={this.loadFile} />
-            </form>
+          <label className="fileContainer">
+          Upload File
+            <input onChange={this.loadFile} type="file" name="markdown" id="markdown"/>
+          </label>
+          
           </nav>
         </header>
         <main className="main">
