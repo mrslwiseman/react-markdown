@@ -45,6 +45,22 @@ class App extends Component {
     })
   }
 
+  onToggleEditorBar = () => {
+    const { showEditor } = this.state;
+    
+    this.setState({
+      showEditor: !showEditor
+
+    })
+  }
+  onTogglePreviewBar = () => {
+    const { showPreviewBar } = this.state;
+    this.setState({
+      showPreviewBar: !showPreviewBar,
+
+    })
+  }
+
   setDimensionsState = () => {
     const { showEditor, showPreviewBar } = this.state;
     if (window.innerWidth < 768) {
@@ -85,7 +101,9 @@ class App extends Component {
         <header>
           <h1>React Markdown Previewer</h1>
           <nav>
-            <button className="nav__button" onClick={this.toggleBar}>Toggle Preview</button>
+          <button className="nav__button" onClick={this.loadSampleData}>Sample</button>
+          <button className="nav__button" onClick={this.onTogglePreviewBar}>Toggle</button>
+          <button className="nav__button" onClick={this.onToggleEditorBar}>Toggle</button>
             <form>
               <input type="file" name="markdown" id="markdown" onChange={this.loadFile} />
             </form>
@@ -106,12 +124,16 @@ class App extends Component {
                 value={this.state.md}
               >
               </textarea>
+              
             </div>
           }
 
           {
             this.state.showPreviewBar &&
             <ReactMarkdown className={'output'} source={this.state.md} />
+            
+            
+            
 
 
           }
