@@ -44,10 +44,11 @@ nav {
     flex-direction: column;
     align-items: stretch;
     flex-grow: 1;
+    padding-top: 25px;
     textarea {
         flex-grow: 1;
         border: 1px solid #ededed;
-        padding: 15px;
+        padding-top: 15px;
         height: 100%;
         font-family: Courier New, Courier, monospace;
         color: #6e6e6e;
@@ -66,11 +67,14 @@ nav {
     // // flex-grow:1;
     // overflow-x: hidden;
     // overflow-y: scroll;
-    overflow: auto;
+    // overflow: auto;
     // padding: 15px;
     // min-height:100%;
+    padding-top: 25px;
+    
     position:relative;
     overflow-wrap: break-word;
+    overflow-y: scroll;
     word-wrap: break-word;
     display:flex;
     min-height: 100%;
@@ -121,7 +125,6 @@ footer {
     }
     .output {
         flex: 1 1 60%;
-        padding: 0 50px;
     }
     
     
@@ -145,8 +148,17 @@ footer {
     flex-shrink: 0;
     width:100%;
     position: absolute;
+    top: 0;
     background: #ddd;
-    height: 50px;
+    height: 25px;
     display: flex;
     justify-content: center;
+}
+
+.output__render {
+    max-height:100%;
+    width: 100%;
+    overflow-y: scroll;
+    padding: 0 50px;
+    
 }
