@@ -38,6 +38,7 @@ nav {
 
 
 .input {
+    position:relative;
     display:flex;
     min-height: 100%;
     flex-direction: column;
@@ -68,6 +69,7 @@ nav {
     overflow: auto;
     // padding: 15px;
     // min-height:100%;
+    position:relative;
     overflow-wrap: break-word;
     word-wrap: break-word;
     display:flex;
@@ -137,4 +139,14 @@ footer {
     span {
         font-size: 0;
     }
+}
+
+.view__buttons {
+    flex-shrink: 0;
+    width:100%;
+    position: absolute;
+    background: #ddd;
+    height: 50px;
+    display: flex;
+    justify-content: center;
 }
