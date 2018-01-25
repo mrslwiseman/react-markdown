@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import ReactMarkdown from 'react-markdown'
 import 'normalize.css';
 import '../styles/App.scss';
 import axios from 'axios'
 import { debounce } from 'lodash'
-
+import Output from './Output'
 import Icon from './Icon'
 import { ICONS } from '../constants'
 
@@ -122,15 +121,7 @@ class App extends Component {
     window.getSelection().removeAllRanges();
   }
 
-onCopyOutput = (e) => {
-  const input = document.createElement('input')
-  const outputHTML = document.querySelector('.output__src').innerHTML
-  input.value = outputHTML
-  document.body.append(input)
-  input.select()
-  document.execCommand('copy')
-  document.body.removeChild(input)
-}
+
 
 
 
@@ -199,19 +190,7 @@ onCopyOutput = (e) => {
 
           {
             this.state.showPreviewBar &&
-            <div className="output">
-              <div className="view__buttons">
-                <button onClick={(e) => this.onCopyOutput(e)}>
-                  <Icon icon={ICONS.COPY} />
-                </button>
-              </div>
-              <ReactMarkdown className="output__src" source={this.state.md}></ReactMarkdown>
-            </div>
-
-
-
-
-
+            <Output source={this.state.md} />
           }
         </main>
 
