@@ -102,9 +102,37 @@ class App extends Component {
     }
   }
 
-onFileUploadClick = () => {
-  this.fileInput.click()
+  onFileUploadClick = () => {
+    this.fileInput.click()
+  }
+
+
+  onCopyInput = () => {
+    window.getSelection().removeAllRanges();
+    const input = document.querySelector('.input__src')
+    const range = document.createRange();
+    range.selectNode(input);
+    window.getSelection().addRange(range);
+    
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.log('Oops, unable to copy');
+    }
+    window.getSelection().removeAllRanges();
+  }
+
+onCopyOutput = (e) => {
+  const input = document.createElement('input')
+  const outputHTML = document.querySelector('.output__src').innerHTML
+  input.value = outputHTML
+  document.body.append(input)
+  input.select()
+  document.execCommand('copy')
+  document.body.removeChild(input)
 }
+
+
 
   render() {
     return (
@@ -115,29 +143,29 @@ onFileUploadClick = () => {
           <nav>
             <ul>
 
-                <button className="nav__button fileContainer" onClick={this.onFileUploadClick}>
-                    <Icon icon={ICONS.UPLOAD} />
-                  <input ref={input => this.fileInput = input} onChange={this.loadFile} type="file" name="file" id="file" />
-                </button>
-                <button className="nav__button" onClick={this.onToggleEditorBar}>
-                  <Icon icon={ICONS.EDIT} />
-                  <span>Toggle Editor</span>
+              <button className="nav__button fileContainer" onClick={this.onFileUploadClick}>
+                <Icon icon={ICONS.UPLOAD} />
+                <input ref={input => this.fileInput = input} onChange={this.loadFile} type="file" name="file" id="file" />
               </button>
-                <button className="nav__button" onClick={this.onTogglePreviewBar}>
-                  <Icon icon={ICONS.PREVIEW} />
-                  <span>Toggle Preview</span>
+              <button className="nav__button" onClick={this.onToggleEditorBar}>
+                <Icon icon={ICONS.EDIT} />
+                <span>Toggle Editor</span>
               </button>
-                <button className="nav__button" onClick={this.onTogglePreviewBar}>
-                  <Icon icon={ICONS.COPY} />
-                  <span>Copy</span>
+              <button className="nav__button" onClick={this.onTogglePreviewBar}>
+                <Icon icon={ICONS.PREVIEW} />
+                <span>Toggle Preview</span>
               </button>
-                <button className="nav__button" onClick={this.onTogglePreviewBar}>
-                  <Icon icon={ICONS.DOWNLOAD} />
-                  <span>Download</span>
+              <button className="nav__button" onClick={this.onCopyInput}>
+                <Icon icon={ICONS.COPY} />
+                <span>Copy</span>
               </button>
-                <button className="nav__button" onClick={this.onTogglePreviewBar}>
-                  <Icon icon={ICONS.SHARE} />
-                  <span>Share</span>
+              <button className="nav__button" onClick={this.onTogglePreviewBar}>
+                <Icon icon={ICONS.DOWNLOAD} />
+                <span>Download</span>
+              </button>
+              <button className="nav__button" onClick={this.onTogglePreviewBar}>
+                <Icon icon={ICONS.SHARE} />
+                <span>Share</span>
               </button>
 
               <button className="nav__button" onClick={this.loadSampleData}>
@@ -151,12 +179,15 @@ onFileUploadClick = () => {
           {
             this.state.showEditor &&
             <div className="input">
+              <div className="view__buttons">
+                <button onClick={this.onCopyInput}>
+                  <Icon icon={ICONS.COPY} />
+                </button>
+              </div>
               <textarea
                 onChange={e => this.setState({ md: e.target.value })}
                 ref={input => this.textarea = input}
-                name="md-input"
-                id="md-input"
-
+                className="input__src"
                 spellCheck={true}
                 autoFocus={true}
                 value={this.state.md}
@@ -168,7 +199,14 @@ onFileUploadClick = () => {
 
           {
             this.state.showPreviewBar &&
-            <ReactMarkdown className={'output'} source={this.state.md}></ReactMarkdown>
+            <div className="output">
+              <div className="view__buttons">
+                <button onClick={(e) => this.onCopyOutput(e)}>
+                  <Icon icon={ICONS.COPY} />
+                </button>
+              </div>
+              <ReactMarkdown className="output__src" source={this.state.md}></ReactMarkdown>
+            </div>
 
 
 
