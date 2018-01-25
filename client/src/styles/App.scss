@@ -1,6 +1,9 @@
 @import '_normalize';
 
-* {box-sizing: border-box}
+* {
+    box-sizing: border-box
+
+}
 html, body {
     height: 100%;
     width: 100%;}
@@ -38,16 +41,11 @@ button {
     }
 }
 .main {
-    /* align-items: stretch; */
-    /* flex-direction: column; */
-    /* height: 100%; */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
-
-
 
 .input {
     position:relative;
@@ -76,17 +74,8 @@ button {
 }
 
 .output {
-    // // flex-grow:1;
-    // overflow-x: hidden;
-    // overflow-y: scroll;
-    // overflow: auto;
-    // padding: 15px;
-    // min-height:100%;
     padding-top: 25px;
-    
     position:relative;
-    overflow-wrap: break-word;
-    overflow-y: scroll;
     word-wrap: break-word;
     display:flex;
     min-height: 100%;
@@ -99,8 +88,6 @@ code {
     img {
         max-width: 100%;
     }
-
-
 }
 
 footer {
@@ -138,8 +125,6 @@ footer {
     .output {
         flex: 1 1 60%;
     }
-    
-    
 }
 
 .fileContainer {
@@ -166,12 +151,10 @@ footer {
     justify-content: flex-end;
 }
 
-.output__render {
-    max-height:100%;
-    width: 100%;
-    overflow-y: scroll;
-    padding: 0 50px;
-    
+.output__src {
+    padding: 25px;
+    max-height: 100%;
+    overflow: auto;
 }
 
 .logo {
