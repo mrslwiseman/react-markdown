@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from './Icon'
 import { ICONS } from '../constants'
 
-const Input = ({ updateSrc, source }) => {
+const Input = ({ onInputChange, source }) => {
     const onCopyInput = () => {
         window.getSelection().removeAllRanges();
         const input = document.querySelector('.input__src')
@@ -25,7 +25,7 @@ const Input = ({ updateSrc, source }) => {
           </button>
         </div>
         <textarea
-          onChange={(e) => updateSrc(e.target.value)}
+          onChange={(e) => onInputChange(e.target.value)}
           className="input__src"
           spellCheck={true}
           autoFocus={true}

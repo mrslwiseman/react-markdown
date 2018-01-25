@@ -3,12 +3,9 @@ import 'normalize.css';
 import '../styles/App.scss';
 import axios from 'axios'
 import { debounce } from 'lodash'
+import Header from './Header'
 import Input from './Input'
 import Output from './Output'
-import Icon from './Icon'
-import { ICONS } from '../constants'
-
-
 
 class App extends Component {
   constructor(props) {
@@ -84,8 +81,6 @@ class App extends Component {
     }
   }
 
-
-
   loadFile = (e) => {
     e.preventDefault();
     console.log(e.target.files);
@@ -102,64 +97,25 @@ class App extends Component {
     }
   }
 
-  onFileUploadClick = () => {
-    this.fileInput.click()
-  }
 
-
-
-
-
-updateSrc = (md) => {
+onInputChange = (md) => {
   this.setState({md})
 }
-
 
   render() {
     return (
       <div className="app">
-        <header>
-          <h1>Yame.</h1>
-          <p>Yet Another Markdown Editor.</p>
-          <nav>
-            <ul>
+        <Header 
+        onToggleEditorBar={this.onToggleEditorBar}
+        onTogglePreviewBar={this.onTogglePreviewBar}
+        loadSampleData={this.loadSampleData}
+        loadFile={this.loadFile}
 
-              <button className="nav__button fileContainer" onClick={this.onFileUploadClick}>
-                <Icon icon={ICONS.UPLOAD} />
-                <input ref={input => this.fileInput = input} onChange={this.loadFile} type="file" name="file" id="file" />
-              </button>
-              <button className="nav__button" onClick={this.onToggleEditorBar}>
-                <Icon icon={ICONS.EDIT} />
-                <span>Toggle Editor</span>
-              </button>
-              <button className="nav__button" onClick={this.onTogglePreviewBar}>
-                <Icon icon={ICONS.PREVIEW} />
-                <span>Toggle Preview</span>
-              </button>
-              <button className="nav__button" onClick={this.onCopyInput}>
-                <Icon icon={ICONS.COPY} />
-                <span>Copy</span>
-              </button>
-              <button className="nav__button" onClick={this.onTogglePreviewBar}>
-                <Icon icon={ICONS.DOWNLOAD} />
-                <span>Download</span>
-              </button>
-              <button className="nav__button" onClick={this.onTogglePreviewBar}>
-                <Icon icon={ICONS.SHARE} />
-                <span>Share</span>
-              </button>
-
-              <button className="nav__button" onClick={this.loadSampleData}>
-                Load Sample
-              </button>
-            </ul>
-
-          </nav>
-        </header>
+        />
         <main className="main">
           {
             this.state.showEditor &&
-            <Input updateSrc={this.updateSrc} source={this.state.md} />
+            <Input onInputChange={this.onInputChange} source={this.state.md} />
             
           }
 
