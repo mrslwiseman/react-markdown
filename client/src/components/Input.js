@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from './Icon'
 import { ICONS } from '../constants'
 
-const Input = ({ onLoadFile, onInputChange, source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView, onDownloadMarkdown }) => {
+const Input = ({ onUploadFile, onInputChange, source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView, onDownloadMarkdown }) => {
     const onFileUploadClick = () => {
         const fileInput = document.querySelector('input[type="file"]')
         fileInput.click();
@@ -54,7 +54,7 @@ const Input = ({ onLoadFile, onInputChange, source, onToggleEditorBar, onToggleP
                 className="fileContainer" 
                 onClick={onFileUploadClick}>
                 <Icon icon={ICONS.UPLOAD} />
-                <input onChange={onLoadFile} type="file" />
+                <input onChange={onUploadFile} type="file" />
             </button>
                 <button onClick={onCopyInput}>
                     <Icon icon={ICONS.COPY} />
