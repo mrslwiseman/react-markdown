@@ -17,7 +17,6 @@ html, body {
     flex-direction: column;
 }
 nav {
-    text-align: center;
     display: flex;
     
     ul {
@@ -25,6 +24,19 @@ nav {
     }
 }
 
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: all 200ms ease;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        transform: scale(1.1)
+
+    }
+}
 .main {
     /* align-items: stretch; */
     /* flex-direction: column; */
@@ -149,10 +161,9 @@ footer {
     width:100%;
     position: absolute;
     top: 0;
-    background: #ddd;
-    height: 25px;
+    height: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 .output__render {
@@ -161,4 +172,17 @@ footer {
     overflow-y: scroll;
     padding: 0 50px;
     
+}
+
+.logo {
+    margin: 0;
+}
+
+.tagline {
+    margin: 0;
+}
+
+nav ul {
+    margin: 0;
+    padding: 5px 0;
 }
