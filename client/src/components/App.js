@@ -3,6 +3,7 @@ import 'normalize.css';
 import '../styles/App.scss';
 import axios from 'axios'
 import { debounce } from 'lodash'
+import Input from './Input'
 import Output from './Output'
 import Icon from './Icon'
 import { ICONS } from '../constants'
@@ -106,23 +107,12 @@ class App extends Component {
   }
 
 
-  onCopyInput = () => {
-    window.getSelection().removeAllRanges();
-    const input = document.querySelector('.input__src')
-    const range = document.createRange();
-    range.selectNode(input);
-    window.getSelection().addRange(range);
-    
-    try {
-      document.execCommand('copy');
-    } catch (err) {
-      console.log('Oops, unable to copy');
-    }
-    window.getSelection().removeAllRanges();
-  }
 
 
 
+updateSrc = (md) => {
+  this.setState({md})
+}
 
 
   render() {
@@ -169,23 +159,8 @@ class App extends Component {
         <main className="main">
           {
             this.state.showEditor &&
-            <div className="input">
-              <div className="view__buttons">
-                <button onClick={this.onCopyInput}>
-                  <Icon icon={ICONS.COPY} />
-                </button>
-              </div>
-              <textarea
-                onChange={e => this.setState({ md: e.target.value })}
-                ref={input => this.textarea = input}
-                className="input__src"
-                spellCheck={true}
-                autoFocus={true}
-                value={this.state.md}
-              >
-              </textarea>
-
-            </div>
+            <Input updateSrc={this.updateSrc} source={this.state.md} />
+            
           }
 
           {
