@@ -4,7 +4,7 @@ import Icon from './Icon'
 import { ICONS } from '../constants'
 
 
-const Output = ({ source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView }) => {
+const Output = ({ source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView, onDownloadHTML }) => {
     const onCopyOutput = (e) => {
         const input = document.createElement('input')
         const outputHTML = document.querySelector('.output__src').innerHTML
@@ -51,6 +51,10 @@ const Output = ({ source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisibl
                 <button onClick={(e) => onCopyOutput(e)}>
                     <Icon icon={ICONS.COPY} />
                 </button>
+                <button 
+                onClick={onDownloadHTML}>
+                <Icon icon={ICONS.DOWNLOAD} />
+            </button>
 
             </div>
             <ReactMarkdown className="output__src" source={source}></ReactMarkdown>

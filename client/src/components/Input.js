@@ -2,7 +2,12 @@ import React from 'react'
 import Icon from './Icon'
 import { ICONS } from '../constants'
 
-const Input = ({ onInputChange, source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView }) => {
+const Input = ({ onLoadFile, onInputChange, source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView, onDownloadMarkdown }) => {
+    const onFileUploadClick = () => {
+        const fileInput = document.querySelector('input[type="file"]')
+        fileInput.click();
+    }
+
     const onCopyInput = () => {
         window.getSelection().removeAllRanges();
         const input = document.querySelector('.input__src')
@@ -45,9 +50,18 @@ const Input = ({ onInputChange, source, onToggleEditorBar, onTogglePreviewBar, i
                         <Icon icon={ICONS.EXPAND} />
                     </button>
                 }
-
+                <button 
+                className="fileContainer" 
+                onClick={onFileUploadClick}>
+                <Icon icon={ICONS.UPLOAD} />
+                <input onChange={onLoadFile} type="file" />
+            </button>
                 <button onClick={onCopyInput}>
                     <Icon icon={ICONS.COPY} />
+                </button>
+                <button
+                    onClick={onDownloadMarkdown}>
+                    <Icon icon={ICONS.DOWNLOAD} />
                 </button>
             </div>
             <textarea
