@@ -9,3 +9,15 @@ export const ICONS = {
   SPLIT: "M22 14h11v3H22v-3zm0-4h11v3H22v-3zm0 9h11v3H22v-3zm13 8H21V4h14v23zM4 14h11v3H4v-3zm0-4h11v3H4v-3zm0 9h11v3H4v-3zm13 8H3V4h14v23zM33.636 0H3.364C1.514 0 0 1.588 0 3.53v22.94C0 28.413 1.514 30 3.364 30h30.272C35.486 30 37 28.412 37 26.47V3.53C37 1.587 35.486 0 33.636 0z"
 };
 
+export const BUTTON = {
+  togglePreview: "Show HTML Preview",
+  toggleEditor: "Show Markdown Editor",
+  expandPreview: "Expand HTML Preview",
+  expandEditor: "Expand Markdown Editor",
+  toggleSplitView: "Toggle Split View",
+  upload: "Upload .md File",
+  copyMD: "Copy Markdown to Clipboard",
+  copyHTML: "Copy HTML to Clipboard",
+  downloadMD: "Download .md file",
+  downloadHTML: "Download .html file"
+}

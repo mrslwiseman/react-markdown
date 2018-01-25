@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import Icon from './Icon'
-import { ICONS } from '../constants'
+import { ICONS, BUTTON } from '../constants'
 
 
 const Output = ({ source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView, onDownloadHTML }) => {
@@ -20,6 +20,7 @@ const Output = ({ source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisibl
                 {
                     outputPaneVisible && !inputPaneVisible &&
                     <button
+                        title={BUTTON.toggleEditor}
                         onClick={onToggleEditorBar}>
                         <Icon icon={ICONS.EDIT} />
                     </button>
@@ -29,32 +30,32 @@ const Output = ({ source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisibl
                 {
                     outputPaneVisible && !inputPaneVisible &&
                     <button
-                    onClick={onToggleSplitView}>
-                    <Icon icon={ICONS.SPLIT} />
-                </button>
-
-
-                }
-                {
-                    !outputPaneVisible && inputPaneVisible &&
-                    <button
-                        onClick={onTogglePreviewBar}>
-                        <Icon icon={ICONS.PREVIEW} />
+                        title={BUTTON.toggleSplitView}
+                        onClick={onToggleSplitView}>
+                        <Icon icon={ICONS.SPLIT} />
                     </button>
+
+
                 }
+                
                 {
                     outputPaneVisible && inputPaneVisible &&
-                    <button onClick={onTogglePreviewBar}>
+                    <button 
+                    title={BUTTON.expandPreview}
+                    onClick={onTogglePreviewBar}>
                         <Icon icon={ICONS.EXPAND} />
                     </button>
                 }
-                <button onClick={(e) => onCopyOutput(e)}>
+                <button
+                    title={BUTTON.copyHTML}
+                    onClick={(e) => onCopyOutput(e)}>
                     <Icon icon={ICONS.COPY} />
                 </button>
-                <button 
-                onClick={onDownloadHTML}>
-                <Icon icon={ICONS.DOWNLOAD} />
-            </button>
+                <button
+                    title={BUTTON.downloadHTML}
+                    onClick={onDownloadHTML}>
+                    <Icon icon={ICONS.DOWNLOAD} />
+                </button>
 
             </div>
             <ReactMarkdown className="output__src" source={source}></ReactMarkdown>

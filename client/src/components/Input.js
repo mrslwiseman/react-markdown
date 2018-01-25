@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from './Icon'
-import { ICONS } from '../constants'
+import { ICONS, BUTTON } from '../constants'
 
 const Input = ({ onUploadFile, onInputChange, source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView, onDownloadMarkdown }) => {
     const onFileUploadClick = () => {
@@ -30,6 +30,7 @@ const Input = ({ onUploadFile, onInputChange, source, onToggleEditorBar, onToggl
                 {
                     !outputPaneVisible && inputPaneVisible &&
                     <button
+                        title={BUTTON.togglePreview}
                         onClick={onTogglePreviewBar}>
                         <Icon icon={ICONS.PREVIEW} />
                     </button>
@@ -38,31 +39,47 @@ const Input = ({ onUploadFile, onInputChange, source, onToggleEditorBar, onToggl
                 {
                     !outputPaneVisible && inputPaneVisible &&
                     <button
+                        title={BUTTON.toggleSplitView}
                         onClick={onToggleSplitView}>
                         <Icon icon={ICONS.SPLIT} />
                     </button>
 
                 }
 
+                
+                <button
+                    title={BUTTON.upload}
+                    className="fileContainer"
+                    onClick={onFileUploadClick}>
+                    <Icon icon={ICONS.UPLOAD} />
+                    <input onChange={onUploadFile} type="file" />
+                </button>
+
+               
+
+             
+
+                <button  
+                    title={BUTTON.copyMD} 
+                    onClick={onCopyInput}>
+                   
+
+                    <Icon icon={ICONS.COPY} />
+                </button>
+
+                <button
+                title={BUTTON.downloadMD}
+                onClick={onDownloadMarkdown}>
+                <Icon icon={ICONS.DOWNLOAD} />
+            </button>
                 {
                     outputPaneVisible && inputPaneVisible &&
-                    <button onClick={onToggleEditorBar}>
+                    <button 
+                        title={BUTTON.expandEditor}
+                        onClick={onToggleEditorBar}>
                         <Icon icon={ICONS.EXPAND} />
                     </button>
                 }
-                <button 
-                className="fileContainer" 
-                onClick={onFileUploadClick}>
-                <Icon icon={ICONS.UPLOAD} />
-                <input onChange={onUploadFile} type="file" />
-            </button>
-                <button onClick={onCopyInput}>
-                    <Icon icon={ICONS.COPY} />
-                </button>
-                <button
-                    onClick={onDownloadMarkdown}>
-                    <Icon icon={ICONS.DOWNLOAD} />
-                </button>
             </div>
             <textarea
                 onChange={(e) => onInputChange(e.target.value)}
