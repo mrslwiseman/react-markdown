@@ -1,4 +1,5 @@
-Yame.
+# Yame
+
 Yet Another Markdown Editor.
 
 Made with 
