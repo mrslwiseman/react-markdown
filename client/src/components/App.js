@@ -12,8 +12,8 @@ class App extends Component {
     super(props)
     this.state = {
       md: '',
-      showPreviewBar: true,
-      showEditor: true,
+      outputPaneVisible: true,
+      inputPaneVisible: true,
       file: null
     };
   }
@@ -36,47 +36,42 @@ class App extends Component {
       .catch(e => alert('That didnt work.' + e))
   }
 
-  toggleBar = () => {
-    // if both editor and preview are visible, toggle preview
-    const { showEditor, showPreviewBar } = this.state;
-
-    this.setState({
-      showPreviewBar: !showPreviewBar,
-      showEditor: !showEditor
-
-    })
-  }
-
   onToggleEditorBar = () => {
-    const { showEditor } = this.state;
-
     this.setState({
-      showEditor: !showEditor
-
+      outputPaneVisible: false,
+      inputPaneVisible: true
     })
   }
   onTogglePreviewBar = () => {
-    const { showPreviewBar } = this.state;
     this.setState({
-      showPreviewBar: !showPreviewBar,
-
+      outputPaneVisible: true,
+      inputPaneVisible: false
     })
+  }
+  onToggleSplitView = () => {
+    if(window.innerWidth > 768){
+
+      this.setState({
+        outputPaneVisible: true,
+        inputPaneVisible: true
+      })
+    } 
   }
 
   setDimensionsState = () => {
-    const { showEditor, showPreviewBar } = this.state;
+    const { inputPaneVisible, outputPaneVisible } = this.state;
     if (window.innerWidth < 768) {
-      if (showEditor && showPreviewBar) {
+      if (inputPaneVisible && outputPaneVisible) {
         // ie its in full screen mode
         this.setState({
-          showEditor: true,
-          showPreviewBar: false
+          inputPaneVisible: true,
+          outputPaneVisible: false
         })
       }
     } else {
       this.setState({
-        showEditor: true,
-        showPreviewBar: true
+        inputPaneVisible: true,
+        outputPaneVisible: true
       })
     }
   }
@@ -110,18 +105,21 @@ onInputChange = (md) => {
         onTogglePreviewBar={this.onTogglePreviewBar}
         loadSampleData={this.loadSampleData}
         loadFile={this.loadFile}
-
+        outputPaneVisible={this.state.outputPaneVisible}
+        inputPaneVisible={this.state.inputPaneVisible}
+        
         />
         <main className="main">
           {
-            this.state.showEditor &&
-            <Input onInputChange={this.onInputChange} source={this.state.md} />
+            this.state.inputPaneVisible &&
+            <Input onToggleSplitView={this.onToggleSplitView} inputPaneVisible={this.state.inputPaneVisible} outputPaneVisible={this.state.outputPaneVisible} onTogglePreviewBar={this.onTogglePreviewBar} onToggleEditorBar={this.onToggleEditorBar} onInputChange={this.onInputChange} source={this.state.md} />
             
           }
 
           {
-            this.state.showPreviewBar &&
-            <Output source={this.state.md} />
+            this.state.outputPaneVisible &&
+        
+        <Output onToggleSplitView={this.onToggleSplitView} inputPaneVisible={this.state.inputPaneVisible} outputPaneVisible={this.state.outputPaneVisible} onToggleEditorBar={this.onToggleEditorBar} onTogglePreviewBar={this.onTogglePreviewBar} source={this.state.md} />
           }
         </main>
 
