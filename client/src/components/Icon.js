@@ -19,7 +19,7 @@ const Icon = props => {
       style={styles.svg}
       width={`${props.size}px`}
       height={`${props.size}px`}
-      viewBox="0 0 32 32"
+      viewBox="0 0 48 48"
     >
       <path
         style={styles.path}
@@ -36,7 +36,7 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
-  size: 24,
+  size: 32,
 };
 
 export default Icon;
