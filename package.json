@@ -2,9 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "engines": {
+    "node": "6.11.x"
+  },
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node server",
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "watch": "concurrently \"npm run start\" \"cd ../client; npm run start\""
   },
   "author": "",
@@ -15,5 +18,9 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.1"
-  }
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "react-ui/node_modules"
+  ]
 }
