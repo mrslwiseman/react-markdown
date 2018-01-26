@@ -43,23 +43,25 @@ button {
 .main {
     flex-grow: 1;
     display: flex;
-    flex-direction: column;
+    //flex-direction: column;
     align-items: stretch;
 }
 
 .input {
+    flex-grow: 1;
     position:relative;
     display:flex;
     min-height: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    flex-grow: 1;
+    // flex-direction: column;
+    // align-items: stretch;
     padding-top: 25px;
+    min-width: 250px;
     textarea {
+        margin: 20px;
         flex-grow: 1;
         border: 1px solid #ededed;
         padding-top: 15px;
-        height: 100%;
+        // height: 100%;
         font-family: Courier New, Courier, monospace;
         color: #6e6e6e;
         line-height: 1.5;
@@ -74,7 +76,6 @@ button {
 }
 
 .output {
-    padding-top: 25px;
     position:relative;
     word-wrap: break-word;
     display:flex;
@@ -90,6 +91,10 @@ code {
     }
 }
 
+header {
+    padding: 10px 10px 20px;
+}
+
 footer {
     background-color: #ededed;
     width:100%;
@@ -103,10 +108,15 @@ footer {
 @media all and (min-width: 768px){
 
     .view__format-buttons {
-        flex-grow: 1;
-        button svg {
-            pointer-events: none;
-        }
+        //flex-grow: 1;
+        margin-left: 10px;
+
+        button {
+            margin: 0 5px;
+            svg {
+                pointer-events: none;
+            }
+        } 
     }
 
     .nav__button {
@@ -124,14 +134,12 @@ footer {
     }
 
     .input {
-        flex: 1 1 40%;
+        flex-shrink: 1;
         textarea {
             resize:horizontal;
         }
     }
-    .output {
-        flex: 1 1 60%;
-    }
+
 }
 
 .fileContainer {
@@ -149,20 +157,35 @@ footer {
 }
 
 .view__buttons {
+    background: white;
     flex-shrink: 0;
     width:100%;
     position: absolute;
     padding-right: 20px;
     top: 0;
-    height: 20px;
+    // height: 20px;
     display: flex;
-    justify-content: flex-end;
 }
 
+
+.input .view__buttons {
+    justify-content: space-between;
+    
+}
+
+.output .view__buttons {
+    justify-content: flex-end;
+    
+}
 .output__src {
     padding: 25px;
     max-height: 100%;
     overflow: auto;
+    div {
+    max-width: 75ch;
+        margin: 0 auto;
+        line-height: 1.6;
+    }   
 }
 
 .logo {

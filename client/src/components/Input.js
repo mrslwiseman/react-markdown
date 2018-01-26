@@ -70,7 +70,8 @@ const Input = ({ onUploadFile, onInputChange, source, onToggleEditorBar, onToggl
                         <MdFormatQuote />
                     </button>
                 </div>
-
+                <div>
+                
                 {
                     !outputPaneVisible && inputPaneVisible &&
                     <span>
@@ -115,6 +116,7 @@ const Input = ({ onUploadFile, onInputChange, source, onToggleEditorBar, onToggl
                         <MdOpenInNew />
                     </button>
                 }
+                </div>
             </div>
             <textarea
                 ref={x => textarea = x}

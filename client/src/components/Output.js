@@ -54,7 +54,9 @@ const Output = ({ source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisibl
                 </button>
 
             </div>
-            <ReactMarkdown className="output__src" source={source}></ReactMarkdown>
+            <div className="output__src">
+                <ReactMarkdown source={source}></ReactMarkdown>
+            </div>
         </div >
     )
 }
