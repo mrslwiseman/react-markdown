@@ -6,8 +6,12 @@
 }
 html, body {
     height: 100%;
-    width: 100%;}
-
+    width: 100%;
+    color: #777873;
+    background-image: linear-gradient(-180deg, #FDFDFD 0%, #F7F6F3 100%);
+    overflow: hidden;
+}
+    
 .app {
     display: flex;
     flex-grow: 1;
@@ -19,6 +23,15 @@ html, body {
     display: flex;
     flex-direction: column;
 }
+
+
+header {
+    padding: 10px 10px 20px;
+    border-bottom: 1px solid #F7F6F3;
+    
+}
+
+
 nav {
     display: flex;
     
@@ -57,66 +70,32 @@ button {
     padding-top: 25px;
     min-width: 250px;
     textarea {
-        margin: 20px;
+        background: none;
+        border: none;
+        margin: 40px 0 0;
         flex-grow: 1;
-        border: 1px solid #ededed;
         padding-top: 15px;
         // height: 100%;
         font-family: Courier New, Courier, monospace;
-        color: #6e6e6e;
+        color: #919191;
         line-height: 1.5;
-        resize: vertical;
+        resize: none;
         &:focus {
             outline: none;
-            box-shadow: 0px 1px 2px 2px rgba(228, 228, 228, 0.8); 
+            box-shadow: 0px 4px 43px 9px rgba(228, 228, 228, 0.75);
             transition: box-shadow 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
             transition-delay: 200ms;
         }
     }
 }
-
-.output {
-    position:relative;
-    word-wrap: break-word;
-    display:flex;
-    min-height: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    flex-grow: 1;
-code {
-    white-space: normal;
-}
-    img {
-        max-width: 100%;
-    }
-}
-
-header {
-    padding: 10px 10px 20px;
-}
-
-footer {
-    background-color: #ededed;
-    width:100%;
-    padding: 25px;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    align-self: flex-end;
-}
-
 @media all and (min-width: 768px){
-
-    .view__format-buttons {
-        //flex-grow: 1;
-        margin-left: 10px;
-
-        button {
-            margin: 0 5px;
-            svg {
-                pointer-events: none;
-            }
-        } 
+    .input {
+        flex-grow: 0;
+        min-width: 600px;
+        textarea {
+            margin-top: 20px;
+            resize:horizontal;
+        }
     }
 
     .nav__button {
@@ -133,14 +112,50 @@ footer {
         padding: 20px 25px;
     }
 
-    .input {
-        flex-shrink: 1;
-        textarea {
-            resize:horizontal;
-        }
-    }
+   
 
 }
+.output {
+    position:relative;
+    word-wrap: break-word;
+    display:flex;
+    min-height: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    flex-grow: 1;
+code {
+    white-space: normal;
+}
+    img {
+        max-width: 100%;
+    }
+}
+
+
+footer {
+    width:100%;
+    padding: 25px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-self: flex-end;
+}
+
+.view__buttons {
+    border-bottom: 1px solid #F7F6F3;
+    //flex-grow: 1;
+    margin-left: 10px;
+    padding: 10px 0;
+    button {
+        margin: 0 5px;
+        color: #777873;
+        svg {
+            pointer-events: none;
+        }
+    } 
+}
+
+
 
 .fileContainer {
     input {
@@ -157,7 +172,6 @@ footer {
 }
 
 .view__buttons {
-    background: white;
     flex-shrink: 0;
     width:100%;
     position: absolute;
@@ -178,7 +192,7 @@ footer {
     
 }
 .output__src {
-    padding: 25px;
+    margin-top:40px;
     max-height: 100%;
     overflow: auto;
     div {
