@@ -54,14 +54,13 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch:styles": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "node scripts/start.js",
-    "build": "npm run build-css && node scripts/build.js",
+    "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
     "concurrently": "^3.5.1",
     "node-sass": "^4.7.2",
-    "node-sass-chokidar": "0.0.3",
     "sass-loader": "^6.0.6",
     "stylus": "^0.54.5"
   },
