@@ -81,7 +81,7 @@ button {
     textarea {
         background: none;
         border: none;
-        margin: 40px 0 0;
+        margin: 52px 0 0;
         flex-grow: 1;
         padding-top: 15px;
         // height: 100%;
@@ -102,7 +102,7 @@ button {
         flex-grow: 0;
         min-width: 600px;
         textarea {
-            margin-top: 20px;
+            
             resize:horizontal;
         }
     }
@@ -118,6 +118,7 @@ button {
     }
 
     .input textarea {
+        margin-top: 32px;
         padding: 20px 25px;
     }
 
