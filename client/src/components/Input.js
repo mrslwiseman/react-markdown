@@ -1,8 +1,13 @@
 import React from 'react'
-import Icon from './Icon'
-import { ICONS, BUTTON } from '../constants'
+import { format } from '../format'
+import { BUTTON } from '../constants'
+import {
+    MdOpenInNew, MdFileDownload, MdRemoveRedEye as MdPreview, MdContentCopy, MdCompare, MdFileUpload,
+    MdFormatBold, MdFormatItalic, MdFormatListBulleted, MdFormatListNumbered, MdCode, MdStrikethroughS, MdFormatQuote, MdFormatSize
+} from 'react-icons/lib/md'
 
 const Input = ({ onUploadFile, onInputChange, source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView, onDownloadMarkdown }) => {
+    let textarea;
     const onFileUploadClick = () => {
         const fileInput = document.querySelector('input[type="file"]')
         fileInput.click();
@@ -18,70 +23,101 @@ const Input = ({ onUploadFile, onInputChange, source, onToggleEditorBar, onToggl
         try {
             document.execCommand('copy');
         } catch (err) {
-            console.log('Oops, unable to copy');
+            alert('That didnt work. Try Select All > Copy');
         }
+    }
+
+    const onFormat = (e) => {
+        const formatType = e.target.dataset.format
+        const updatedValue = format(formatType, textarea)
+
+        onInputChange(updatedValue)
     }
 
     return (
         <div className="input">
             <div className="view__buttons">
 
+                <div className="view__format-buttons">
+                    <button data-format={'h1'} onClick={onFormat}>
+                        H1
+                    </button>
+                    <button data-format={'h2'} onClick={onFormat}>
+                        H2
+                    </button>
+                    <button data-format={'h3'} onClick={onFormat}>
+                        H3
+                    </button>
+                    <button data-format={'bold'} onClick={e => onFormat(e)}>
+                        <MdFormatBold />
+                    </button>
+                    <button data-format={'italic'} onClick={onFormat}>
+                        <MdFormatItalic />
+                    </button>
+                    <button data-format={'strikethrough'} onClick={onFormat}>
+                        <MdStrikethroughS />
+                    </button>
+                    <button data-format={'list_bullet'} onClick={onFormat}>
+                        <MdFormatListBulleted />
+                    </button>
+                    <button data-format={'list_number'} onClick={onFormat}>
+                        <MdFormatListNumbered />
+                    </button>
+                    <button data-format={'code'} onClick={onFormat}>
+                        <MdCode />
+                    </button>
+                    <button data-format={'blockquote'} onClick={onFormat}>
+                        <MdFormatQuote />
+                    </button>
+                </div>
 
                 {
                     !outputPaneVisible && inputPaneVisible &&
-                    <button
+                    <span>
+                        <button
                         title={BUTTON.togglePreview}
                         onClick={onTogglePreviewBar}>
-                        <Icon icon={ICONS.PREVIEW} />
-                    </button>
-
-                }
-                {
-                    !outputPaneVisible && inputPaneVisible &&
-                    <button
+                        <MdPreview />
+                        </button>
+                        <button
                         title={BUTTON.toggleSplitView}
                         onClick={onToggleSplitView}>
-                        <Icon icon={ICONS.SPLIT} />
-                    </button>
-
+                        <MdCompare />
+                        </button>
+                    </span>
                 }
-
                 
                 <button
                     title={BUTTON.upload}
                     className="fileContainer"
                     onClick={onFileUploadClick}>
-                    <Icon icon={ICONS.UPLOAD} />
+                    <MdFileUpload />
                     <input onChange={onUploadFile} type="file" />
                 </button>
 
-               
-
-             
-
-                <button  
-                    title={BUTTON.copyMD} 
+                <button
+                    title={BUTTON.copyMD}
                     onClick={onCopyInput}>
-                   
-
-                    <Icon icon={ICONS.COPY} />
+                    <MdContentCopy />
                 </button>
 
                 <button
-                title={BUTTON.downloadMD}
-                onClick={onDownloadMarkdown}>
-                <Icon icon={ICONS.DOWNLOAD} />
-            </button>
+                    title={BUTTON.downloadMD}
+                    onClick={onDownloadMarkdown}>
+                    <MdFileDownload />
+                </button>
+
                 {
                     outputPaneVisible && inputPaneVisible &&
-                    <button 
+                    <button
                         title={BUTTON.expandEditor}
                         onClick={onToggleEditorBar}>
-                        <Icon icon={ICONS.EXPAND} />
+                        <MdOpenInNew />
                     </button>
                 }
             </div>
             <textarea
+                ref={x => textarea = x}
                 onChange={(e) => onInputChange(e.target.value)}
                 className="input__src"
                 spellCheck={true}

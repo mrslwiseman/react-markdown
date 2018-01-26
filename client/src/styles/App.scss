@@ -102,6 +102,13 @@ footer {
 
 @media all and (min-width: 768px){
 
+    .view__format-buttons {
+        flex-grow: 1;
+        button svg {
+            pointer-events: none;
+        }
+    }
+
     .nav__button {
         display: inline-block;
         padding: 10px 15px;

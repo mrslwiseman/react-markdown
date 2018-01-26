@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import Icon from './Icon'
-import { ICONS, BUTTON } from '../constants'
-
+import {BUTTON} from '../constants'
+import {MdEdit, MdOpenInNew, MdFileDownload, MdContentCopy, MdCompare} from 'react-icons/lib/md'
 
 const Output = ({ source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisible, outputPaneVisible, onToggleSplitView, onDownloadHTML }) => {
     const onCopyOutput = (e) => {
@@ -19,42 +18,39 @@ const Output = ({ source, onToggleEditorBar, onTogglePreviewBar, inputPaneVisibl
             <div className="view__buttons">
                 {
                     outputPaneVisible && !inputPaneVisible &&
-                    <button
+                    <span>
+                        <button
                         title={BUTTON.toggleEditor}
                         onClick={onToggleEditorBar}>
-                        <Icon icon={ICONS.EDIT} />
-                    </button>
-
-
-                }
-                {
-                    outputPaneVisible && !inputPaneVisible &&
-                    <button
+                        <MdEdit />
+                        </button>
+                        <button
                         title={BUTTON.toggleSplitView}
                         onClick={onToggleSplitView}>
-                        <Icon icon={ICONS.SPLIT} />
-                    </button>
-
+                        <MdCompare />
+                        </button>
+                    </span>
 
                 }
+           
                 
                 {
                     outputPaneVisible && inputPaneVisible &&
                     <button 
                     title={BUTTON.expandPreview}
                     onClick={onTogglePreviewBar}>
-                        <Icon icon={ICONS.EXPAND} />
+                    <MdOpenInNew />
                     </button>
                 }
                 <button
                     title={BUTTON.copyHTML}
                     onClick={(e) => onCopyOutput(e)}>
-                    <Icon icon={ICONS.COPY} />
+                    <MdContentCopy />
                 </button>
                 <button
                     title={BUTTON.downloadHTML}
                     onClick={onDownloadHTML}>
-                    <Icon icon={ICONS.DOWNLOAD} />
+                    <MdFileDownload />
                 </button>
 
             </div>

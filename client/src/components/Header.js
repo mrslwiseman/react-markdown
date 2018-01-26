@@ -1,6 +1,4 @@
 import React from 'react'
-import Icon from './Icon'
-import { ICONS } from '../constants'
 
 const Header = ({onToggleEditorBar, onTogglePreviewBar, onToggleSplitView, loadSampleData, onLoadFile, inputPaneVisible, outputPaneVisible, downloadMarkdown, downloadHTML}) => {
 
