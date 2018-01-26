@@ -8,7 +8,6 @@ import Input from './Input'
 import Output from './Output'
 import {saveAs} from 'file-saver'
 
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -24,7 +23,7 @@ class App extends Component {
 
   componentWillMount() {
     this.setDimensionsState()
-    //this.loadSampleData();
+    this.loadSampleData();
     window.addEventListener('resize', debounce(() => this.setDimensionsState(), 50))
   }
   componentWillUnmount() {
@@ -108,8 +107,9 @@ class App extends Component {
   }
 
 
-onInputChange = (md) => {
-  this.setState({md})
+onInputChange = (inputValue) => {
+
+  this.setState({md: inputValue})
 }
 
   render() {
@@ -127,16 +127,30 @@ onInputChange = (md) => {
         <main className="main">
           {
             this.state.inputPaneVisible &&
-            <Input onUploadFile={this.onUploadFile} onDownloadMarkdown={this.onDownloadMarkdown} onToggleSplitView={this.onToggleSplitView} inputPaneVisible={this.state.inputPaneVisible} outputPaneVisible={this.state.outputPaneVisible} onTogglePreviewBar={this.onTogglePreviewBar} onToggleEditorBar={this.onToggleEditorBar} onInputChange={this.onInputChange} source={this.state.md} />
+            <Input onUploadFile={this.onUploadFile}
+                onDownloadMarkdown={this.onDownloadMarkdown}
+                onToggleSplitView={this.onToggleSplitView}
+                inputPaneVisible={this.state.inputPaneVisible}
+                outputPaneVisible={this.state.outputPaneVisible}
+                onTogglePreviewBar={this.onTogglePreviewBar}
+                onToggleEditorBar={this.onToggleEditorBar}
+                onInputChange={this.onInputChange} source={this.state.md} />
             
           }
 
           {
             this.state.outputPaneVisible &&
         
-        <Output onDownloadHTML={this.onDownloadHTML} onToggleSplitView={this.onToggleSplitView} inputPaneVisible={this.state.inputPaneVisible} outputPaneVisible={this.state.outputPaneVisible} onToggleEditorBar={this.onToggleEditorBar} onTogglePreviewBar={this.onTogglePreviewBar} source={this.state.md} />
+        <Output onDownloadHTML={this.onDownloadHTML} 
+            onToggleSplitView={this.onToggleSplitView} 
+            inputPaneVisible={this.state.inputPaneVisible} 
+            outputPaneVisible={this.state.outputPaneVisible} 
+            onToggleEditorBar={this.onToggleEditorBar} 
+            onTogglePreviewBar={this.onTogglePreviewBar} 
+            source={this.state.md} />
           }
-        </main>
+
+          </main>
 
       </div>
     );
