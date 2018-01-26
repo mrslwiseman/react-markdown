@@ -4,8 +4,8 @@ const Header = ({onToggleEditorBar, onTogglePreviewBar, onToggleSplitView, loadS
 
     return (
         <header>
-            <h1 className='logo'>Yame.</h1>
-            <p className='tagline'>Yet Another Markdown Editor.</p>
+            <h1 className='logo'>Yame<span className='tagline'>Yet Another Markdown Editor.</span></h1>
+            
         </header>
 
     )

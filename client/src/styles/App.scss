@@ -1,5 +1,10 @@
 @import '_normalize';
-
+$featureColor: #0090BB;
+$bgColor1: #FDFDFD;
+$bgColor2: #F7F6F3;
+$textColor: #777873;
+$lineAccentColor: #F7F6F3;
+$inputTextColor: #919191;
 * {
     box-sizing: border-box
 
@@ -7,9 +12,13 @@
 html, body {
     height: 100%;
     width: 100%;
-    color: #777873;
-    background-image: linear-gradient(-180deg, #FDFDFD 0%, #F7F6F3 100%);
+    color: $textColor;
+    background-image: linear-gradient(-180deg, $bgColor1 0%, $bgColor2 100%);
     overflow: hidden;
+}
+
+.github-corner {
+    fill: $featureColor !important;
 }
     
 .app {
@@ -26,9 +35,9 @@ html, body {
 
 
 header {
-    padding: 10px 10px 20px;
-    border-bottom: 1px solid #F7F6F3;
-    
+    padding: 10px 25px 20px;
+    border-bottom: 1px solid $lineAccentColor;
+    color: $featureColor;
 }
 
 
@@ -77,7 +86,7 @@ button {
         padding-top: 15px;
         // height: 100%;
         font-family: Courier New, Courier, monospace;
-        color: #919191;
+        color: $inputTextColor;
         line-height: 1.5;
         resize: none;
         &:focus {
@@ -142,19 +151,27 @@ footer {
 }
 
 .view__buttons {
-    border-bottom: 1px solid #F7F6F3;
+    border-bottom: 1px solid $lineAccentColor;
     //flex-grow: 1;
     margin-left: 10px;
     padding: 10px 0;
     button {
-        margin: 0 5px;
-        color: #777873;
+        padding: 5px;
+        // margin: 0 5px;
+        color: $textColor;
         svg {
             pointer-events: none;
         }
     } 
 }
 
+@media screen and (min-width:768px){
+    .view__buttons {
+        button {
+            padding:10px;
+        } 
+    }
+}
 
 
 .fileContainer {
@@ -204,10 +221,13 @@ footer {
 
 .logo {
     margin: 0;
+    font-size: 2em;
 }
 
 .tagline {
     margin: 0;
+    margin-left: 20px;
+    font-size: .5em;
 }
 
 nav ul {
